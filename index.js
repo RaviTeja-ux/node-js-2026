@@ -1,20 +1,30 @@
-// console.log('Hello World');
 
-var fs = require('fs');
-const os = require('os');
-const http = require('http')
-// const process = require('process');
+import express from 'express';
+import { MongoClient } from 'mongodb';
 
-// fs.writeFileSync('hello.txt', 'Hello from Node.js');
+const dbName = 'school';
+const url = 'mongodb://localhost:27017';
 
-// // console.log(os.version());
-// // console.log(os.cpus());
-// console.log(process.cwd());
+const client = new MongoClient(url);
 
-const server = http.createServer((req, res) => {
-    if (req.url === '/') {
-        res.write('Hello from Node.js');
-        res.end();
-    }
-});
-server.listen(3000);
+const app = express()
+
+
+client.connect()
+.then((connection) => {
+   const db = connection.db(dbName)
+    console.log('Connected to database')
+    app.get('/api/students', async(req, res) => {
+        const collection = db.collection('students')
+        const students = await collection.find().toArray()
+        console.log(students)
+        res.send(students)
+})
+})
+.catch((error) => {
+    console.log(error)
+})
+
+app.listen(5000, () => {
+    console.log('Server is running on port 5000')
+})  
