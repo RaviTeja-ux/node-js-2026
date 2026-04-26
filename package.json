@@ -2,9 +2,11 @@
   "name": "node-2026",
   "version": "1.0.0",
   "description": "node js practice",
-  "main": "index.js",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/RaviTeja-ux/node-js-2026/issues"
   },
-  "homepage": "https://github.com/RaviTeja-ux/node-js-2026#readme"
+  "homepage": "https://github.com/RaviTeja-ux/node-js-2026#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.5.0"
+  }
 }
